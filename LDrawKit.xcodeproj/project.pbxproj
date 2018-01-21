@@ -10,6 +10,12 @@
 		70ED6EF7201303EB00BAF509 /* LDrawKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70ED6EED201303EB00BAF509 /* LDrawKit.framework */; };
 		70ED6EFC201303EB00BAF509 /* LDrawKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6EFB201303EB00BAF509 /* LDrawKitTests.swift */; };
 		70ED6EFE201303EB00BAF509 /* LDrawKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 70ED6EF0201303EB00BAF509 /* LDrawKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70ED6F082013040D00BAF509 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F072013040D00BAF509 /* Part.swift */; };
+		70ED6F0B201404CB00BAF509 /* String+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F0A201404CB00BAF509 /* String+RawRepresentable.swift */; };
+		70ED6F0D201404F800BAF509 /* String+Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F0C201404F800BAF509 /* String+Trim.swift */; };
+		70ED6F0F20142C0F00BAF509 /* PartLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F0E20142C0F00BAF509 /* PartLine.swift */; };
+		70ED6F1120142F5500BAF509 /* LDColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F1020142F5500BAF509 /* LDColour.swift */; };
+		70ED6F13201430C500BAF509 /* CGColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F12201430C500BAF509 /* CGColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +35,12 @@
 		70ED6EF6201303EB00BAF509 /* LDrawKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LDrawKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70ED6EFB201303EB00BAF509 /* LDrawKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDrawKitTests.swift; sourceTree = "<group>"; };
 		70ED6EFD201303EB00BAF509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70ED6F072013040D00BAF509 /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
+		70ED6F0A201404CB00BAF509 /* String+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RawRepresentable.swift"; sourceTree = "<group>"; };
+		70ED6F0C201404F800BAF509 /* String+Trim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Trim.swift"; sourceTree = "<group>"; };
+		70ED6F0E20142C0F00BAF509 /* PartLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartLine.swift; sourceTree = "<group>"; };
+		70ED6F1020142F5500BAF509 /* LDColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDColour.swift; sourceTree = "<group>"; };
+		70ED6F12201430C500BAF509 /* CGColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +83,12 @@
 		70ED6EEF201303EB00BAF509 /* LDrawKit */ = {
 			isa = PBXGroup;
 			children = (
+				70ED6F09201404B100BAF509 /* Extensions */,
 				70ED6EF0201303EB00BAF509 /* LDrawKit.h */,
 				70ED6EF1201303EB00BAF509 /* Info.plist */,
+				70ED6F072013040D00BAF509 /* Part.swift */,
+				70ED6F0E20142C0F00BAF509 /* PartLine.swift */,
+				70ED6F1020142F5500BAF509 /* LDColour.swift */,
 			);
 			path = LDrawKit;
 			sourceTree = "<group>";
@@ -84,6 +100,16 @@
 				70ED6EFD201303EB00BAF509 /* Info.plist */,
 			);
 			path = LDrawKitTests;
+			sourceTree = "<group>";
+		};
+		70ED6F09201404B100BAF509 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				70ED6F0A201404CB00BAF509 /* String+RawRepresentable.swift */,
+				70ED6F0C201404F800BAF509 /* String+Trim.swift */,
+				70ED6F12201430C500BAF509 /* CGColor+Hex.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +174,7 @@
 				TargetAttributes = {
 					70ED6EEC201303EB00BAF509 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					70ED6EF5201303EB00BAF509 = {
@@ -196,6 +223,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70ED6F1120142F5500BAF509 /* LDColour.swift in Sources */,
+				70ED6F13201430C500BAF509 /* CGColor+Hex.swift in Sources */,
+				70ED6F0B201404CB00BAF509 /* String+RawRepresentable.swift in Sources */,
+				70ED6F0F20142C0F00BAF509 /* PartLine.swift in Sources */,
+				70ED6F082013040D00BAF509 /* Part.swift in Sources */,
+				70ED6F0D201404F800BAF509 /* String+Trim.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +366,7 @@
 		70ED6F02201303EB00BAF509 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -348,6 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaizen.LDrawKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -355,6 +390,7 @@
 		70ED6F03201303EB00BAF509 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -377,6 +413,7 @@
 		70ED6F05201303EB00BAF509 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = YWXH886EY3;
@@ -391,6 +428,7 @@
 		70ED6F06201303EB00BAF509 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = YWXH886EY3;
