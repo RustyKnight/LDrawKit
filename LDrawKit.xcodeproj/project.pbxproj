@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70826E68201A8545002B59F6 /* BFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E67201A8545002B59F6 /* BFC.swift */; };
+		70826E6A201A855B002B59F6 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E69201A855B002B59F6 /* Command.swift */; };
+		70826E7C201C1B89002B59F6 /* LogWrapperKit_MacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */; };
+		70826E7E201C1BD3002B59F6 /* LDrawKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E7D201C1BD3002B59F6 /* LDrawKit.swift */; };
+		70A3E6902015C66400D7FAAA /* String+Mutating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3E68F2015C66400D7FAAA /* String+Mutating.swift */; };
 		70ED6EF7201303EB00BAF509 /* LDrawKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70ED6EED201303EB00BAF509 /* LDrawKit.framework */; };
 		70ED6EFC201303EB00BAF509 /* LDrawKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6EFB201303EB00BAF509 /* LDrawKitTests.swift */; };
 		70ED6EFE201303EB00BAF509 /* LDrawKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 70ED6EF0201303EB00BAF509 /* LDrawKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,6 +34,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		70826E67201A8545002B59F6 /* BFC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFC.swift; sourceTree = "<group>"; };
+		70826E69201A855B002B59F6 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit_MacOS.framework; path = Carthage/Build/Mac/LogWrapperKit_MacOS.framework; sourceTree = "<group>"; };
+		70826E7D201C1BD3002B59F6 /* LDrawKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDrawKit.swift; sourceTree = "<group>"; };
+		70A3E68F2015C66400D7FAAA /* String+Mutating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Mutating.swift"; sourceTree = "<group>"; };
 		70ED6EED201303EB00BAF509 /* LDrawKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LDrawKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70ED6EF0201303EB00BAF509 /* LDrawKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDrawKit.h; sourceTree = "<group>"; };
 		70ED6EF1201303EB00BAF509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70826E7C201C1B89002B59F6 /* LogWrapperKit_MacOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +73,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		70826E7A201C1B89002B59F6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		70ED6EE3201303EB00BAF509 = {
 			isa = PBXGroup;
 			children = (
 				70ED6EEF201303EB00BAF509 /* LDrawKit */,
 				70ED6EFA201303EB00BAF509 /* LDrawKitTests */,
 				70ED6EEE201303EB00BAF509 /* Products */,
+				70826E7A201C1B89002B59F6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +109,9 @@
 				70ED6F072013040D00BAF509 /* Part.swift */,
 				70ED6F0E20142C0F00BAF509 /* PartLine.swift */,
 				70ED6F1020142F5500BAF509 /* LDColour.swift */,
+				70826E67201A8545002B59F6 /* BFC.swift */,
+				70826E69201A855B002B59F6 /* Command.swift */,
+				70826E7D201C1BD3002B59F6 /* LDrawKit.swift */,
 			);
 			path = LDrawKit;
 			sourceTree = "<group>";
@@ -108,6 +131,7 @@
 				70ED6F0A201404CB00BAF509 /* String+RawRepresentable.swift */,
 				70ED6F0C201404F800BAF509 /* String+Trim.swift */,
 				70ED6F12201430C500BAF509 /* CGColor+Hex.swift */,
+				70A3E68F2015C66400D7FAAA /* String+Mutating.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -227,8 +251,12 @@
 				70ED6F13201430C500BAF509 /* CGColor+Hex.swift in Sources */,
 				70ED6F0B201404CB00BAF509 /* String+RawRepresentable.swift in Sources */,
 				70ED6F0F20142C0F00BAF509 /* PartLine.swift in Sources */,
+				70A3E6902015C66400D7FAAA /* String+Mutating.swift in Sources */,
+				70826E6A201A855B002B59F6 /* Command.swift in Sources */,
 				70ED6F082013040D00BAF509 /* Part.swift in Sources */,
 				70ED6F0D201404F800BAF509 /* String+Trim.swift in Sources */,
+				70826E7E201C1BD3002B59F6 /* LDrawKit.swift in Sources */,
+				70826E68201A8545002B59F6 /* BFC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,10 +403,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = LDrawKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaizen.LDrawKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -399,10 +431,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = LDrawKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaizen.LDrawKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -417,6 +453,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = YWXH886EY3;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = LDrawKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaizen.LDrawKitTests;
@@ -432,6 +469,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = YWXH886EY3;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = LDrawKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaizen.LDrawKitTests;

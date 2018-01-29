@@ -21,3 +21,17 @@ extension String {
     return trimmingCharacters(in: CharacterSet.newlines)
   }
 }
+
+extension String.SubSequence {
+	var trimming: String {
+		return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+	}
+	
+	var trimmingWhiteSpaces: String {
+		return trimmingCharacters(in: CharacterSet.whitespaces)
+	}
+	
+	var trimmingNewLines: String {
+		return trimmingCharacters(in: CharacterSet.newlines)
+	}
+}

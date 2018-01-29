@@ -16,4 +16,9 @@ extension String {
   func replacingOccurrences<T>(of value: T, with text: String) -> String where T: RawRepresentable, T.RawValue == String {
     return replacingOccurrences(of: value.rawValue, with: text)
   }
+	
+	func contains<T>(_ value: T) -> Bool where T: RawRepresentable, T.RawValue == String {
+		return contains(value.rawValue)
+	}
 }
+
