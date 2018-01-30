@@ -31,12 +31,18 @@ class LDrawKitTests: XCTestCase {
 			print("Read \(partPath) from \(pathPrefix)")
 		
 			let part = try Part(pathPrefix: pathPrefix, source: partPath)
-			
-			for command in part.commands {
-				print("Command = \(command.type)")
-			}
+			dump(part.commands)
 		} catch let error {
 			XCTFail("\(error)")
+		}
+	}
+	
+	func dump(_ commands: [Command]) {
+		for command in commands {
+			print(command)
+			if let subFileCommand = command as? SubFileCommand {
+				dump(subFileCommand.commands)
+			}
 		}
 	}
 }
