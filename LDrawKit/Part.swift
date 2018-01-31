@@ -56,16 +56,16 @@ open class Part {
   
   var description: String?
   
-  private(set) var comments: [String] = []
-  private(set) var meta: [MetaCommand: String] = [:]
-  private(set) var keywords: [String] = []
-  private(set) var history: [String] = []
-	private(set) var license: [String] = []
+  public private(set) var comments: [String] = []
+  public private(set) var meta: [MetaCommand: String] = [:]
+  public private(set) var keywords: [String] = []
+  public private(set) var history: [String] = []
+	public private(set) var license: [String] = []
 	
-	private(set) var bfcCertification: BFCCertification = .notCertified
-	private(set) var defaultBFC: BFC = .counterClockWise
+	public private(set) var bfcCertification: BFCCertification = .notCertified
+	public private(set) var defaultBFC: BFC = .counterClockWise
 	
-	private(set) var commands: [Command] = []
+	public private(set) var commands: [Command] = []
 	
 	private let pathPrefix: URL
 
@@ -188,12 +188,12 @@ open class Part {
 		} else if line.starts(with: LineType.quadrilateral) {
 			commands.append(try parse(quadrilateral: line.removing(upToAndIncluding: LineType.quadrilateral).trimming))
 		} else {
-			log(warning: "Ignoring \(line)")
+      log(warning: "Ignoring \(line)")
 		}
   }
   
   func parse(comment: String) {
-		commands.append(DefaultCommand(type: .comment, text: comment.removing(upToAndIncluding: "//").trimming))
+		commands.append(DefaultCommentCommand(text: comment.removing(upToAndIncluding: "//").trimming))
   }
 	
 	private func matrix(from points: [String]) throws -> [Int] {
@@ -224,7 +224,7 @@ open class Part {
 		// 3 - z
 		// 4-12 - a b c d e f g h i
 		// 13 - File
-		log(debug: "SubFile - \(text)")
+//    log(debug: "SubFile - \(text)")
 		let parts: [String] = text.trimming.split(separator: " ").map { String($0) }
 		guard parts.count == Part.SUB_FILE_COMMAND_COUNT else {
 			throw PartError.invalidSubFileCommand
@@ -232,7 +232,7 @@ open class Part {
 		guard let colourID = Int(parts[0]) else {
 			throw PartError.invalidColourID
 		}
-		log(debug: "colourID - \(colourID)")
+//    log(debug: "colourID - \(colourID)")
 		guard let colour = LDColourManager.shared.colourBy(id: colourID) else {
 			throw PartError.invalidColourID
 		}
@@ -241,12 +241,12 @@ open class Part {
 			throw PartError.invalidSubFileCommand
 		}
 
-		log(debug: "location - \(location)")
+//    log(debug: "location - \(location)")
 		let matrixPoints = parts[4...12].map { $0 }
 		let matrix = try self.matrix(from: matrixPoints)
-		log(debug: "matrix - \(matrix)")
+//    log(debug: "matrix - \(matrix)")
 		let path = parts[13].replacingOccurrences(of: "\\", with: "/")
-		log(debug: "path - \(path)")
+//    log(debug: "path - \(path)")
 		
 		let searchPaths: [String] = [
 			"p/48",
@@ -268,7 +268,7 @@ open class Part {
 		}
 		
 		guard let subPath = pathToUse else {
-			log(debug: "Could not find path for \(path)")
+      log(error: "Could not find path for \(path)")
 			throw PartError.subFileNotFound
 		}
 		
@@ -278,7 +278,7 @@ open class Part {
 
 	func parse(line text: String) throws -> LineCommand {
 		// 2 <colour> x1 y1 z1 x2 y2 z2
-		log(debug: "Line - \(text)")
+//    log(debug: "Line - \(text)")
 		let parts = text.components(separatedBy: " ")
 		guard parts.count == Part.LINE_COMMAND_COUNT else {
 			throw PartError.invalidLineCommand
@@ -287,7 +287,7 @@ open class Part {
 		guard let colourID = Int(parts[0]) else {
 			throw PartError.invalidColourID
 		}
-		log(debug: "colourID - \(colourID)")
+//    log(debug: "colourID - \(colourID)")
 		guard let colour = LDColourManager.shared.colourBy(id: colourID) else {
 			throw PartError.invalidColourID
 		}
@@ -306,7 +306,7 @@ open class Part {
 
 	func parse(triangle text: String) throws -> TriangleCommand {
 		// 3 <colour> x1 y1 z1 x2 y2 z2 x3 y3 z3
-		log(debug: "Triangle - \(text)")
+//    log(debug: "Triangle - \(text)")
 		
 		let parts = text.components(separatedBy: " ")
 		guard parts.count == Part.TRIANGLE_COMMAND_COUNT else {
@@ -316,7 +316,7 @@ open class Part {
 		guard let colourID = Int(parts[0]) else {
 			throw PartError.invalidColourID
 		}
-		log(debug: "colourID - \(colourID)")
+//    log(debug: "colourID - \(colourID)")
 		guard let colour = LDColourManager.shared.colourBy(id: colourID) else {
 			throw PartError.invalidColourID
 		}
@@ -338,7 +338,7 @@ open class Part {
 
 	func parse(quadrilateral text: String) throws -> QuadrilateralCommand {
 		// 4 <colour> x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4
-		log(debug: "Quadrilateral - \(text)")
+//    log(debug: "Quadrilateral - \(text)")
 		
 		let parts = text.components(separatedBy: " ")
 		guard parts.count == Part.QUADRILATERAL_COMMAND_COUNT else {
@@ -348,7 +348,7 @@ open class Part {
 		guard let colourID = Int(parts[0]) else {
 			throw PartError.invalidColourID
 		}
-		log(debug: "colourID - \(colourID)")
+//    log(debug: "colourID - \(colourID)")
 		guard let colour = LDColourManager.shared.colourBy(id: colourID) else {
 			throw PartError.invalidColourID
 		}

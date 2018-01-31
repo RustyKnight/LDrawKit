@@ -89,11 +89,11 @@ open class LDColourManager {
 	
 	public private(set) var colours: [LDColour] = []
 	
-	func colourBy(id: Int) -> LDColour? {
+	public func colourBy(id: Int) -> LDColour? {
 		return colours.first { $0.id.id == id }
 	}
   
-  func load(from path: URL) throws {
+  public func load(from path: URL) throws {
 		colours = []
     let contents = try String(contentsOf: path).components(separatedBy: "\r\n")
     

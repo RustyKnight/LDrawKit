@@ -23,7 +23,7 @@ class LDrawKitTests: XCTestCase {
 
 	func testHeader() {
 		do {
-			try LDColourManager.shared.load(from: URL(fileURLWithPath: "/Volumes/Big Fat Extension/DevWork/xcode/Lego/LDrawKit/LDConfig.ldr"))
+			try LDColourManager.shared.load(from: URL(fileURLWithPath: "/Users/swhitehead/Downloads/ldraw/LDConfig.ldr"))
 			
 			
 			let pathPrefix = URL(fileURLWithPath: "/Users/swhitehead/Downloads/ldraw")

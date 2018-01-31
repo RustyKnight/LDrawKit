@@ -56,6 +56,10 @@ public protocol Command {
 	var type: LineType { get }
 }
 
+public protocol CommentCommand: Command {
+  var bfc: BFC? {get}
+}
+
 public protocol ColorCommand: Command {
 	var colour: LDColour { get }
 }
@@ -81,7 +85,7 @@ public protocol TriangleCommand: ColorCommand, MultiPointCommand {
 public protocol QuadrilateralCommand: ColorCommand, MultiPointCommand {
 }
 
-class DefaultCommand: Command {
+class DefaultCommand: Command, CustomStringConvertible {
 	
 	let type: LineType
 	let text: String
@@ -91,6 +95,24 @@ class DefaultCommand: Command {
 		self.text = text
 	}
 	
+  var description: String {
+    return "Command type = \(type); text = \(text)"
+  }
+  
+}
+
+class DefaultCommentCommand: DefaultCommand, CommentCommand {
+  
+  var bfc: BFC?
+  
+  override init(type: LineType = .comment, text: String) {
+    super.init(type: type, text: text)
+    guard text.starts(with: MetaCommand.bfc) else {
+      return
+    }
+    let comment = text.replacingOccurrences(of: MetaCommand.bfc, with: "").trimming
+    bfc = BFC(rawValue: comment)
+  }
 }
 
 class DefaultColorCommand: DefaultCommand, ColorCommand {

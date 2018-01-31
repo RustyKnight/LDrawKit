@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7023ECC220212DD80045BC70 /* LogWrapperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7023ECC120212DD80045BC70 /* LogWrapperKit.framework */; };
 		70826E68201A8545002B59F6 /* BFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E67201A8545002B59F6 /* BFC.swift */; };
 		70826E6A201A855B002B59F6 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E69201A855B002B59F6 /* Command.swift */; };
-		70826E7C201C1B89002B59F6 /* LogWrapperKit_MacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */; };
 		70826E7E201C1BD3002B59F6 /* LDrawKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E7D201C1BD3002B59F6 /* LDrawKit.swift */; };
 		70A3E6902015C66400D7FAAA /* String+Mutating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3E68F2015C66400D7FAAA /* String+Mutating.swift */; };
 		70ED6EF7201303EB00BAF509 /* LDrawKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70ED6EED201303EB00BAF509 /* LDrawKit.framework */; };
@@ -34,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7023ECC120212DD80045BC70 /* LogWrapperKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit.framework; path = Carthage/Build/Mac/LogWrapperKit.framework; sourceTree = "<group>"; };
 		70826E67201A8545002B59F6 /* BFC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFC.swift; sourceTree = "<group>"; };
 		70826E69201A855B002B59F6 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit_MacOS.framework; path = Carthage/Build/Mac/LogWrapperKit_MacOS.framework; sourceTree = "<group>"; };
@@ -58,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70826E7C201C1B89002B59F6 /* LogWrapperKit_MacOS.framework in Frameworks */,
+				7023ECC220212DD80045BC70 /* LogWrapperKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +77,7 @@
 		70826E7A201C1B89002B59F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7023ECC120212DD80045BC70 /* LogWrapperKit.framework */,
 				70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */,
 			);
 			name = Frameworks;
