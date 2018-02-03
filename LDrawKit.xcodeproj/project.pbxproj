@@ -11,7 +11,10 @@
 		70826E68201A8545002B59F6 /* BFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E67201A8545002B59F6 /* BFC.swift */; };
 		70826E6A201A855B002B59F6 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E69201A855B002B59F6 /* Command.swift */; };
 		70826E7E201C1BD3002B59F6 /* LDrawKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E7D201C1BD3002B59F6 /* LDrawKit.swift */; };
+		708D6D7E2022ECBB009DED22 /* PartParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D6D7D2022ECBB009DED22 /* PartParser.swift */; };
+		708D6D802022EE18009DED22 /* FileFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D6D7F2022EE18009DED22 /* FileFinder.swift */; };
 		70A3E6902015C66400D7FAAA /* String+Mutating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3E68F2015C66400D7FAAA /* String+Mutating.swift */; };
+		70D23EC52025A6630025E5AC /* LDrawParts.zip in Resources */ = {isa = PBXBuildFile; fileRef = 70D23EC42025A6630025E5AC /* LDrawParts.zip */; };
 		70ED6EF7201303EB00BAF509 /* LDrawKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70ED6EED201303EB00BAF509 /* LDrawKit.framework */; };
 		70ED6EFC201303EB00BAF509 /* LDrawKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6EFB201303EB00BAF509 /* LDrawKitTests.swift */; };
 		70ED6EFE201303EB00BAF509 /* LDrawKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 70ED6EF0201303EB00BAF509 /* LDrawKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,7 +42,10 @@
 		70826E69201A855B002B59F6 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit_MacOS.framework; path = Carthage/Build/Mac/LogWrapperKit_MacOS.framework; sourceTree = "<group>"; };
 		70826E7D201C1BD3002B59F6 /* LDrawKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDrawKit.swift; sourceTree = "<group>"; };
+		708D6D7D2022ECBB009DED22 /* PartParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartParser.swift; sourceTree = "<group>"; };
+		708D6D7F2022EE18009DED22 /* FileFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFinder.swift; sourceTree = "<group>"; };
 		70A3E68F2015C66400D7FAAA /* String+Mutating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Mutating.swift"; sourceTree = "<group>"; };
+		70D23EC42025A6630025E5AC /* LDrawParts.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LDrawParts.zip; sourceTree = "<group>"; };
 		70ED6EED201303EB00BAF509 /* LDrawKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LDrawKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70ED6EF0201303EB00BAF509 /* LDrawKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDrawKit.h; sourceTree = "<group>"; };
 		70ED6EF1201303EB00BAF509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +89,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		70D23EC12025A3E90025E5AC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				70D23EC42025A6630025E5AC /* LDrawParts.zip */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		70ED6EE3201303EB00BAF509 = {
 			isa = PBXGroup;
 			children = (
@@ -105,15 +119,18 @@
 		70ED6EEF201303EB00BAF509 /* LDrawKit */ = {
 			isa = PBXGroup;
 			children = (
-				70ED6F09201404B100BAF509 /* Extensions */,
-				70ED6EF0201303EB00BAF509 /* LDrawKit.h */,
-				70ED6EF1201303EB00BAF509 /* Info.plist */,
-				70ED6F072013040D00BAF509 /* Part.swift */,
-				70ED6F0E20142C0F00BAF509 /* PartLine.swift */,
-				70ED6F1020142F5500BAF509 /* LDColour.swift */,
 				70826E67201A8545002B59F6 /* BFC.swift */,
 				70826E69201A855B002B59F6 /* Command.swift */,
+				70ED6F09201404B100BAF509 /* Extensions */,
+				708D6D7F2022EE18009DED22 /* FileFinder.swift */,
+				70ED6EF1201303EB00BAF509 /* Info.plist */,
+				70ED6F1020142F5500BAF509 /* LDColour.swift */,
+				70ED6EF0201303EB00BAF509 /* LDrawKit.h */,
 				70826E7D201C1BD3002B59F6 /* LDrawKit.swift */,
+				70ED6F072013040D00BAF509 /* Part.swift */,
+				70ED6F0E20142C0F00BAF509 /* PartLine.swift */,
+				708D6D7D2022ECBB009DED22 /* PartParser.swift */,
+				70D23EC12025A3E90025E5AC /* Resources */,
 			);
 			path = LDrawKit;
 			sourceTree = "<group>";
@@ -232,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70D23EC52025A6630025E5AC /* LDrawParts.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +274,9 @@
 				70A3E6902015C66400D7FAAA /* String+Mutating.swift in Sources */,
 				70826E6A201A855B002B59F6 /* Command.swift in Sources */,
 				70ED6F082013040D00BAF509 /* Part.swift in Sources */,
+				708D6D802022EE18009DED22 /* FileFinder.swift in Sources */,
 				70ED6F0D201404F800BAF509 /* String+Trim.swift in Sources */,
+				708D6D7E2022ECBB009DED22 /* PartParser.swift in Sources */,
 				70826E7E201C1BD3002B59F6 /* LDrawKit.swift in Sources */,
 				70826E68201A8545002B59F6 /* BFC.swift in Sources */,
 			);

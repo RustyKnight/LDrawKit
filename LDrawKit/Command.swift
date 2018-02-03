@@ -70,6 +70,8 @@ public protocol SubFileCommand: ColorCommand {
 	var path: String { get }
 	
 	var commands: [Command] { get }
+	
+	func invert() -> SubFileCommand
 }
 
 public protocol MultiPointCommand: Command {
@@ -77,12 +79,15 @@ public protocol MultiPointCommand: Command {
 }
 
 public protocol LineCommand: ColorCommand, MultiPointCommand {
+	func invert() -> LineCommand
 }
 
 public protocol TriangleCommand: ColorCommand, MultiPointCommand {
+	func invert() -> TriangleCommand
 }
 
 public protocol QuadrilateralCommand: ColorCommand, MultiPointCommand {
+	func invert() -> QuadrilateralCommand
 }
 
 class DefaultCommand: Command, CustomStringConvertible {
@@ -137,12 +142,27 @@ class DefaultSubFileCommand: DefaultColorCommand, SubFileCommand {
 	
 	var part: Part
 	
-	init(type: LineType = .subFile, text: String, colour: LDColour, location: Point3D, matrix: [Int], pathPrefix: URL, path: String) throws {
+	init(type: LineType = .subFile, text: String, colour: LDColour, location: Point3D, matrix: [Int], pathPrefix: URL, named: String) throws {
 		self.location = location
 		self.matrix = matrix
-		self.path = path
-		try self.part = Part(pathPrefix: pathPrefix, source: path)
+		self.path = named
+		
+		self.part = try PartParsr(path: pathPrefix, name: named).parse()
+		
+//		try self.part = Part(pathPrefix: pathPrefix, source: name)
 		super.init(type: type, text: text, colour: colour)
+	}
+	
+	private init(text: String, colour: LDColour, location: Point3D, matrix: [Int], named: String, part: Part) {
+		self.location = location
+		self.matrix = matrix
+		self.path = named
+		self.part = part
+		super.init(type: .subFile, text: text, colour: colour)
+	}
+	
+	func invert() -> SubFileCommand {
+		// Have to invert the part...
 	}
 
 }
@@ -164,6 +184,9 @@ class DefaultLineCommand: DefaultMultiPointCommand, LineCommand {
 		super.init(type: type, text: text, colour: colour, points: points)
 	}
 	
+	func invert() -> LineCommand {
+		return DefaultLineCommand(text: self.text, colour: self.colour, points: self.points.reversed())
+	}
 }
 
 class DefaultTriangleCommand: DefaultMultiPointCommand, TriangleCommand {
@@ -171,7 +194,11 @@ class DefaultTriangleCommand: DefaultMultiPointCommand, TriangleCommand {
 	override init(type: LineType = .line, text: String, colour: LDColour, points: [Point3D]) {
 		super.init(type: type, text: text, colour: colour, points: points)
 	}
-	
+
+	func invert() -> TriangleCommand {
+		return DefaultTriangleCommand(text: self.text, colour: self.colour, points: self.points.reversed())
+	}
+
 }
 
 class DefaultQuadrilateralCommand: DefaultMultiPointCommand, QuadrilateralCommand {
@@ -179,5 +206,9 @@ class DefaultQuadrilateralCommand: DefaultMultiPointCommand, QuadrilateralComman
 	override init(type: LineType = .line, text: String, colour: LDColour, points: [Point3D]) {
 		super.init(type: type, text: text, colour: colour, points: points)
 	}
-	
+
+	func invert() -> QuadrilateralCommand {
+		return DefaultQuadrilateralCommand(text: self.text, colour: self.colour, points: self.points.reversed())
+	}
+
 }
