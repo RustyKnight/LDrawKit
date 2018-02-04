@@ -47,7 +47,7 @@ class DefaultPoint3D: Point3D {
 	}
 	
 	var description: String {
-		return "DefaultPoint3D: x = \(x); y = \(y); x = \(z)"
+		return "DefaultPoint3D: x = \(x); y = \(y); z = \(z)"
 	}
 }
 

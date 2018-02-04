@@ -97,8 +97,6 @@ open class DefaultPart: Part {
 		
 		var newCommands: [Command] = []
 		
-		log(debug: "Started with = \(comments.count) commands")
-		
 		for command in commands {
 			var newCommand: Command? = command
 			if let command = command as? LineCommand {
@@ -118,7 +116,7 @@ open class DefaultPart: Part {
 				invertNext = false
 			} else if let command = command as? SubFileCommand {
 				newCommand = command.conformingTo(winding: winding)
-				if invertNext {
+				if !invertNext {
 					newCommand = command.inverted()
 				}
 				invertNext = false
@@ -144,7 +142,6 @@ open class DefaultPart: Part {
 		
 		let conformedPart = DefaultPart(from: self)
 		conformedPart.commands = newCommands
-		log(debug: "Ended with \(comments.count) commands")
 		
 		return conformedPart
 	}
@@ -161,8 +158,6 @@ open class DefaultPart: Part {
 				continue
 			}
 			if let command = command as? LineCommand {
-				log(debug: "Before invert = \(command)")
-				log(debug: "After invert = \(command.inverted())")
 				newCommands.append(command.inverted())
 			} else if let command = command as? TriangleCommand {
 				newCommands.append(command.inverted())
