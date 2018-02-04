@@ -116,7 +116,7 @@ open class DefaultPart: Part {
 				invertNext = false
 			} else if let command = command as? SubFileCommand {
 				newCommand = command.conformingTo(winding: winding)
-				if !invertNext {
+				if invertNext {
 					newCommand = command.inverted()
 				}
 				invertNext = false
