@@ -32,7 +32,7 @@ public struct DefaultColourID: ColourID {
   public let description: String
 }
 
-public struct DefaultLDColour: LDColour {
+public struct DefaultLDColour: LDColour, CustomStringConvertible {
   public let legoID: [ColourID]
   public let id: ColourID
   public let value: String
@@ -51,6 +51,10 @@ public struct DefaultLDColour: LDColour {
   public var edgeColor: CGColor {
     return CGColor.from(hex: value, alpha: alphaValue)
   }
+	
+	public var description: String {
+		return "LDColour: id = \(id); value = \(value); edge = \(edge); alpha = \(alpha); luminance = \(String(describing: luminance)); material = \(material)"
+	}
   
 }
 

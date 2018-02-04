@@ -33,8 +33,11 @@ class LDrawKitTests: XCTestCase {
 			let part = try PartParser(partName: named).parse()
 		
 //			let part = try Part(pathPrefix: pathPrefix, source: partPath)
-//			dump(part.commands)
-			part.conformingTo(winding: .counterClockWise)
+			dump(part.commands)
+			
+			print("-----")
+			let baked = part.conformingTo(winding: .counterClockWise)
+			dump(baked.commands)
 		} catch let error {
 			XCTFail("\(error)")
 		}

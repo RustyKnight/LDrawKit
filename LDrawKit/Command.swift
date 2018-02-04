@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol Point3D {
+public protocol Point3D: CustomStringConvertible {
 	var x: Double { get }
 	var y: Double { get }
 	var z: Double { get }
@@ -18,7 +18,7 @@ public enum Point3DError: Error {
 	case invalidPoints
 }
 
-class DefaultPoint3D: Point3D, CustomStringConvertible {
+class DefaultPoint3D: Point3D {
 	var x: Double
 	var y: Double
 	var z: Double
@@ -130,6 +130,10 @@ class DefaultColorCommand: DefaultCommand, ColorCommand {
 		super.init(type: type, text: text)
 	}
 	
+	override var description: String {
+		return super.description + "; colour = \(colour)"
+	}
+	
 }
 
 class DefaultSubFileCommand: DefaultColorCommand, SubFileCommand {
@@ -182,6 +186,11 @@ class DefaultMultiPointCommand: DefaultColorCommand, MultiPointCommand {
 		self.points = points
 		super.init(type: type, text: text, colour: colour)
 	}
+	
+	override var description: String {
+		
+		return super.description + "; points = \(points.map({$0.description}).joined(separator: ", "))"
+	}
 
 }
 
@@ -192,7 +201,8 @@ class DefaultLineCommand: DefaultMultiPointCommand, LineCommand {
 	}
 	
 	func inverted() -> LineCommand {
-		return DefaultLineCommand(text: self.text, colour: self.colour, points: self.points.reversed())
+		let p = self.points.reversed().map { $0 }
+		return DefaultLineCommand(text: self.text, colour: self.colour, points: p)
 	}
 }
 
@@ -203,7 +213,8 @@ class DefaultTriangleCommand: DefaultMultiPointCommand, TriangleCommand {
 	}
 
 	func inverted() -> TriangleCommand {
-		return DefaultTriangleCommand(text: self.text, colour: self.colour, points: self.points.reversed())
+		let p = self.points.reversed().map { $0 }
+		return DefaultTriangleCommand(text: self.text, colour: self.colour, points: p)
 	}
 
 }
@@ -215,7 +226,8 @@ class DefaultQuadrilateralCommand: DefaultMultiPointCommand, QuadrilateralComman
 	}
 
 	func inverted() -> QuadrilateralCommand {
-		return DefaultQuadrilateralCommand(text: self.text, colour: self.colour, points: self.points.reversed())
+		let p = self.points.reversed().map { $0 }
+		return DefaultQuadrilateralCommand(text: self.text, colour: self.colour, points: p)
 	}
 
 }
