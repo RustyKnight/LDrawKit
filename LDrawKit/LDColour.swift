@@ -66,6 +66,9 @@ public enum LDColourManagerError: Error {
 	
 	case invalidKey(key: ColourParameter)
 	case noValueForKey(key: ColourParameter)
+	
+	case catalogNotFound
+	case invalidEncoding
 }
 
 public enum ColourParameter: String {
@@ -93,9 +96,17 @@ open class LDColourManager {
 		return colours.first { $0.id.id == id }
 	}
   
-  public func load(from path: URL) throws {
+  public func load() throws {
+		guard let data = try FileFinder.shared.find(fileNamed: "LDConfig.ldr") else {
+			throw LDColourManagerError.catalogNotFound
+		}
+		
 		colours = []
-    let contents = try String(contentsOf: path).components(separatedBy: "\r\n")
+		guard let text = String(data: data, encoding: .utf8) else {
+			throw LDColourManagerError.invalidEncoding
+		}
+		
+		let contents = text.components(separatedBy: "\r\n")
     
     var legoIDs: [ColourID] = []
     for line in contents {
@@ -111,27 +122,7 @@ open class LDColourManager {
       if text.starts(with: ColourParameter.legoID) {
 				text = text.removing(upToAndIncluding: ColourParameter.legoID).trimming
 				legoIDs = try parse(legoID: text)
-//        let parts = text.trimming.components(separatedBy: " - ")
-//
-////				311 / 227 - Transparent Bright Green / Transparent Bright Yellowish Green 3
-//
-//				let ids = parts[0].components(separatedBy: " / ")
-//				let descriptions = parts[1].components(separatedBy: " / ")
-//
-//				legoIDs = []
-//				for index in 0..<ids.count {
-//					guard let id = Int(ids[index].trimming) else {
-//						throw LDColourManagerError.invalidID
-//					}
-//					let name = descriptions[index]
-//					let legoID = DefaultColourID(id: id, description: name)
-//					legoIDs.append(legoID)
-//				}
       } else if text.starts(with: ColourParameter.color) {
-//        guard !legoIDs.isEmpty else {
-//          throw LDColourManagerError.invalidCommandOrder
-//        }
-
 				let colour = try parse(line: text, legoIDs: legoIDs)
 				colours.append(colour)
 				legoIDs = []

@@ -23,15 +23,18 @@ class LDrawKitTests: XCTestCase {
 
 	func testHeader() {
 		do {
-			try LDColourManager.shared.load(from: URL(fileURLWithPath: "/Users/swhitehead/Downloads/ldraw/LDConfig.ldr"))
+			try LDColourManager.shared.load()
 			
 			
-			let pathPrefix = URL(fileURLWithPath: "/Users/swhitehead/Downloads/ldraw")
-			let partPath = "parts/3005.dat"
-			print("Read \(partPath) from \(pathPrefix)")
+//			let pathPrefix = URL(fileURLWithPath: "/Users/swhitehead/Downloads/ldraw")
+			let named = "parts/3005.dat"
+			print("Read \(named)")
+			
+			let part = try PartParser(partName: named).parse()
 		
-			let part = try Part(pathPrefix: pathPrefix, source: partPath)
-			dump(part.commands)
+//			let part = try Part(pathPrefix: pathPrefix, source: partPath)
+//			dump(part.commands)
+			part.conformingTo(winding: .counterClockWise)
 		} catch let error {
 			XCTFail("\(error)")
 		}

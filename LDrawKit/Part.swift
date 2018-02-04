@@ -49,6 +49,9 @@ public protocol Part {
 	var author: String? { get }
 	
 	var category: String? { get }
+
+	func conformingTo(winding: BFC) -> Part
+	func inverted() -> Part
 }
 
 open class DefaultPart: Part {
@@ -73,6 +76,63 @@ open class DefaultPart: Part {
   public var category: String? {
     return meta[MetaCommand.category]
   }
+	
+	public func conformingTo(winding: BFC) -> Part {
+		var invertNext = false
+		
+		log(debug: "Winding = \(winding)")
+		log(debug: "defaultBFC = \(defaultBFC)")
+		let needsInverstion = winding != defaultBFC
+		
+		var newCommands: [Command] = []
+		
+		for command in commands {
+			if let command = command as? LineCommand {
+				if (needsInverstion && !invertNext) || invertNext {
+					newCommands.append(command.inverted())
+				}
+				invertNext = false
+			} else if let command = command as? TriangleCommand {
+				if (needsInverstion && !invertNext) || invertNext {
+					newCommands.append(command.inverted())
+				}
+				invertNext = false
+			} else if let command = command as? QuadrilateralCommand {
+				if (needsInverstion && !invertNext) || invertNext {
+					newCommands.append(command.inverted())
+				}
+				invertNext = false
+			} else if let command = command as? SubFileCommand {
+				var newCommand = command.conformingTo(winding: winding)
+				if invertNext {
+					newCommand = newCommand.inverted()
+				}
+				newCommands.append(newCommand)
+				invertNext = false
+			} else if let command = command as? CommentCommand {
+				log(debug: "Comment = \(command)")
+				guard command.text.starts(with: MetaCommand.bfc) else {
+					newCommands.append(command)
+					continue
+				}
+				let text = command.text.removing(text: MetaCommand.bfc).trimming
+				log(debug: "Comment text = \(text)")
+				guard text.starts(with: BFC.invertNext) else {
+					newCommands.append(command)
+					continue
+				}
+				log(debug: "Invert next")
+				invertNext = true
+			} else {
+				invertNext = false
+			}
+		}
+		return self
+	}
+	
+	public func inverted() -> Part {
+		return self
+	}
   
 //	public init(pathPrefix: URL, source: String) throws {
 //		self.pathPrefix = pathPrefix

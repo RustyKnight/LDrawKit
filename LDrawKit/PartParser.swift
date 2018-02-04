@@ -19,10 +19,25 @@ public enum PartError: Error {
 	case invalidQuadrilateralCommand
 	
 	case fileNotFound
+	case invalidCoding
 }
 
+class PartCache {
+	static let shared: PartCache = PartCache()
+	
+	var cache: [String: Part] = [:]
+	
+	func part(byName name: String) -> Part? {
+		return cache[name]
+	}
+	
+	func cache(part: Part, byName name: String) {
+		return self.cache[name] = part
+	}
+	
+}
 
-public class PartParsr {
+public class PartParser {
 	
 	static let SUB_FILE_COMMAND_COUNT = 14
 	static let LINE_COMMAND_COUNT = 7
@@ -33,25 +48,30 @@ public class PartParsr {
 		static let comment = "// "
 	}
 
-	let path: URL
 	let name: String
 
 	var commands: [Command] = []
 
 	var part: DefaultPart!
 	
-	var defaultBFC: BFC = .counterClockWise
+//	var defaultBFC: BFC = .counterClockWise
 	
-	public init(path: URL, name: String) {
-		self.path = path
-		self.name = name
+	public init(partName: String) {
+		self.name = partName
 	}
 	
 	public func parse() throws -> Part {
-		guard let path = FileFinder.shared.find(fileNamed: name, withPathPrefix: path) else {
+		if let part = PartCache.shared.part(byName: name) {
+			return part
+		}
+		
+		guard let data = try FileFinder.shared.find(fileNamed: name) else {
 			throw PartError.fileNotFound
 		}
-		let contents = try String(contentsOf: path).components(separatedBy: "\r\n").filter { $0.trimming.count > 0 }
+		guard let text = String(data: data, encoding: .utf8) else {
+			throw PartError.invalidCoding
+		}
+		let contents = text.components(separatedBy: "\r\n").filter { $0.trimming.count > 0 }
 		guard contents.count > 0 else {
 			throw PartError.emptyFile
 		}
@@ -80,6 +100,8 @@ public class PartParsr {
 		
 		let commandLines = contents[index...contents.count - 1].map { $0 }
 		part.commands = try parse(commands: commandLines)
+		
+		PartCache.shared.cache(part: part, byName: name)
 		
 		return part
 	}
@@ -132,9 +154,10 @@ public class PartParsr {
 			part.bfcCertification = .certified
 			// Personally, I wouldn't care, but this is the
 			// correct format for the header
-			if text.contains(BFC.clockWise) {
+			let winding = text.removing(upToAndIncluding: BFCCertification.certified).trimming
+			if winding.starts(with: BFC.clockWise) {
 				fileBFC = .clockWise
-			} else if text.contains(BFC.counterClockWise) {
+			} else if winding.starts(with: BFC.counterClockWise) {
 				fileBFC = .counterClockWise
 			}
 		} else if text.contains(BFCCertification.notCertified) {
@@ -208,7 +231,7 @@ public class PartParsr {
 		// 4-12 - a b c d e f g h i
 		// 13 - File
 		let parts: [String] = text.trimming.split(separator: " ").map { String($0) }
-		guard parts.count == PartParsr.SUB_FILE_COMMAND_COUNT else {
+		guard parts.count == PartParser.SUB_FILE_COMMAND_COUNT else {
 			throw PartError.invalidSubFileCommand
 		}
 		guard let colourID = Int(parts[0]) else {
@@ -232,14 +255,14 @@ public class PartParsr {
 //		}
 //
 //		let named = subPath.path
-		return try DefaultSubFileCommand(text: text, colour: colour, location: location, matrix: matrix, pathPrefix: path, named: subFile)
+		return try DefaultSubFileCommand(text: text, colour: colour, location: location, matrix: matrix, named: subFile)
 	}
 	
 	func parse(line text: String) throws -> LineCommand {
 		// 2 <colour> x1 y1 z1 x2 y2 z2
 		//    log(debug: "Line - \(text)")
 		let parts = text.components(separatedBy: " ")
-		guard parts.count == PartParsr.LINE_COMMAND_COUNT else {
+		guard parts.count == PartParser.LINE_COMMAND_COUNT else {
 			throw PartError.invalidLineCommand
 		}
 		
@@ -268,7 +291,7 @@ public class PartParsr {
 		//    log(debug: "Triangle - \(text)")
 		
 		let parts = text.components(separatedBy: " ")
-		guard parts.count == PartParsr.TRIANGLE_COMMAND_COUNT else {
+		guard parts.count == PartParser.TRIANGLE_COMMAND_COUNT else {
 			throw PartError.invalidLineCommand
 		}
 		
@@ -300,7 +323,7 @@ public class PartParsr {
 		//    log(debug: "Quadrilateral - \(text)")
 		
 		let parts = text.components(separatedBy: " ")
-		guard parts.count == PartParsr.QUADRILATERAL_COMMAND_COUNT else {
+		guard parts.count == PartParser.QUADRILATERAL_COMMAND_COUNT else {
 			throw PartError.invalidLineCommand
 		}
 		
