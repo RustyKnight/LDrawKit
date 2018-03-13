@@ -30,6 +30,11 @@ public protocol LDColour {
 public struct DefaultColourID: ColourID {
   public let id: Int
   public let description: String
+	
+	public init(id: Int, description: String) {
+		self.id = id;
+		self.description = description
+	}
 }
 
 public struct DefaultLDColour: LDColour, CustomStringConvertible {
@@ -40,8 +45,18 @@ public struct DefaultLDColour: LDColour, CustomStringConvertible {
   public let alpha: Int
   public let luminance: Int?
   public let material: String
+	
+	public init(legoID: [ColourID], id: ColourID, value: String, edge: String, alpha: Int, luminance: Int?, material: String) {
+		self.legoID = legoID
+		self.id = id
+		self.value = value
+		self.edge = edge
+		self.alpha = alpha
+		self.luminance = luminance
+		self.material = material
+	}
   
-  var alphaValue: CGFloat {
+  public var alphaValue: CGFloat {
     return min(max(0.0, CGFloat(alpha) / 255.0), 255.0)
   }
   

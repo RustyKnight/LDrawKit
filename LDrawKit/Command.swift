@@ -18,12 +18,12 @@ public enum Point3DError: Error {
 	case invalidPoints
 }
 
-class DefaultPoint3D: Point3D {
-	var x: Double
-	var y: Double
-	var z: Double
+open class DefaultPoint3D: Point3D {
+	public var x: Double
+	public var y: Double
+	public var z: Double
 
-	convenience init?(points: [String]) throws {
+	public convenience init?(points: [String]) throws {
 		guard points.count == 3 else {
 			throw Point3DError.invalidPoints
 		}
@@ -33,20 +33,20 @@ class DefaultPoint3D: Point3D {
 		try self.init(points: [xValue, yValue, zValue])
 	}
 	
-	convenience init?(points: [Double]) throws {
+	public convenience init?(points: [Double]) throws {
 		guard points.count == 3 else {
 			throw Point3DError.invalidPoints
 		}
 		self.init(x: points[0], y: points[1], z: points[2])
 	}
 	
-	init(x: Double, y: Double, z: Double) {
+	public init(x: Double, y: Double, z: Double) {
 		self.x = x
 		self.y = y
 		self.z = z
 	}
 	
-	var description: String {
+	public var description: String {
 		return "DefaultPoint3D: x = \(x); y = \(y); z = \(z)"
 	}
 }
@@ -71,7 +71,9 @@ public protocol SubFileCommand: ColorCommand {
 	
 	var commands: [Command] { get }
 	
-	func conformingTo(winding: BFC) -> SubFileCommand
+	func baked() -> SubFileCommand
+	
+//	func conformingTo(winding: BFC) -> SubFileCommand
 	func inverted() -> SubFileCommand
 }
 
@@ -91,27 +93,31 @@ public protocol QuadrilateralCommand: ColorCommand, MultiPointCommand {
 	func inverted() -> QuadrilateralCommand
 }
 
-class DefaultCommand: Command, CustomStringConvertible {
+open class DefaultCommand: Command, CustomStringConvertible {
 	
-	let type: LineType
-	let text: String
+	public let type: LineType
+	public let text: String
 
-	init(type: LineType, text: String) {
+	public init(type: LineType, text: String) {
 		self.type = type
 		self.text = text
 	}
 	
-  var description: String {
+  public var description: String {
     return "Command type = \(type); text = \(text)"
   }
+	
+	public func inverted() -> Command {
+		return self
+	}
   
 }
 
-class DefaultCommentCommand: DefaultCommand, CommentCommand {
+open class DefaultCommentCommand: DefaultCommand, CommentCommand {
   
-  var bfc: BFC?
+  public var bfc: BFC?
   
-  override init(type: LineType = .comment, text: String) {
+  public override init(type: LineType = .comment, text: String) {
     super.init(type: type, text: text)
     guard text.starts(with: MetaCommand.bfc) else {
       return
@@ -121,33 +127,33 @@ class DefaultCommentCommand: DefaultCommand, CommentCommand {
   }
 }
 
-class DefaultColorCommand: DefaultCommand, ColorCommand {
+open class DefaultColorCommand: DefaultCommand, ColorCommand {
 	
-	let colour: LDColour
+	public let colour: LDColour
 	
-	init(type: LineType, text: String, colour: LDColour) {
+	public init(type: LineType, text: String, colour: LDColour) {
 		self.colour = colour
 		super.init(type: type, text: text)
 	}
 	
-	override var description: String {
+	public override var description: String {
 		return super.description + "; colour = \(colour)"
 	}
 	
 }
 
-class DefaultSubFileCommand: DefaultColorCommand, SubFileCommand {
+open class DefaultSubFileCommand: DefaultColorCommand, SubFileCommand {
 
-	var location: Point3D
-	var matrix: [Int]
-	var name: String
-	var commands: [Command] {
+	public var location: Point3D
+	public var matrix: [Int]
+	public var name: String
+	public var commands: [Command] {
 		return part.commands
 	}
 	
-	var part: Part
+	public var part: Part
 	
-	init(text: String, colour: LDColour, location: Point3D, matrix: [Int], named: String) throws {
+	public init(text: String, colour: LDColour, location: Point3D, matrix: [Int], named: String) throws {
 		self.location = location
 		self.matrix = matrix
 		self.name = named
@@ -166,66 +172,74 @@ class DefaultSubFileCommand: DefaultColorCommand, SubFileCommand {
 		super.init(type: .subFile, text: text, colour: colour)
 	}
 	
-	func conformingTo(winding: BFC) -> SubFileCommand {
-		let part = self.part.conformingTo(winding: winding)
+//	func conformingTo(winding: BFC) -> SubFileCommand {
+//		let part = self.part.conformingTo(winding: winding)
+//		return DefaultSubFileCommand(text: text, colour: colour, location: location, matrix: matrix, named: name, part: part)
+//	}
+	
+	public func baked() -> SubFileCommand {
+		let part = self.part.backed()
 		return DefaultSubFileCommand(text: text, colour: colour, location: location, matrix: matrix, named: name, part: part)
 	}
 	
-	func inverted() -> SubFileCommand {
+	public func inverted() -> SubFileCommand {
 		let part = self.part.inverted()
 		return DefaultSubFileCommand(text: text, colour: colour, location: location, matrix: matrix, named: name, part: part)
+	}
+	
+	public override var description: String {
+		return "\(type); \(matrix.map({$0.description}).joined(separator: ", ")); \(location)"
 	}
 
 }
 
-class DefaultMultiPointCommand: DefaultColorCommand, MultiPointCommand {
+open class DefaultMultiPointCommand: DefaultColorCommand, MultiPointCommand {
 	
-	var points: [Point3D]
+	public var points: [Point3D]
 
-	init(type: LineType, text: String, colour: LDColour, points: [Point3D]) {
+	public init(type: LineType, text: String, colour: LDColour, points: [Point3D]) {
 		self.points = points
 		super.init(type: type, text: text, colour: colour)
 	}
 	
-	override var description: String {
-		
-		return super.description + "; points = \(points.map({$0.description}).joined(separator: ", "))"
+	public override var description: String {
+		return "\(type); \(points.map({$0.description}).joined(separator: ", "))"
 	}
 
 }
 
-class DefaultLineCommand: DefaultMultiPointCommand, LineCommand {
+open class DefaultLineCommand: DefaultMultiPointCommand, LineCommand {
 
-	init(text: String, colour: LDColour, points: [Point3D]) {
+	public init(text: String, colour: LDColour, points: [Point3D]) {
 		super.init(type: .line, text: text, colour: colour, points: points)
 	}
 	
-	func inverted() -> LineCommand {
+	public func inverted() -> LineCommand {
 		let p = self.points.reversed().map { $0 }
 		return DefaultLineCommand(text: self.text, colour: self.colour, points: p)
 	}
 }
 
-class DefaultTriangleCommand: DefaultMultiPointCommand, TriangleCommand {
+open class DefaultTriangleCommand: DefaultMultiPointCommand, TriangleCommand {
 	
-	init(text: String, colour: LDColour, points: [Point3D]) {
+	public init(text: String, colour: LDColour, points: [Point3D]) {
 		super.init(type: .triangle, text: text, colour: colour, points: points)
 	}
 
-	func inverted() -> TriangleCommand {
+	public func inverted() -> TriangleCommand {
 		let p = self.points.reversed().map { $0 }
 		return DefaultTriangleCommand(text: self.text, colour: self.colour, points: p)
 	}
 
 }
 
-class DefaultQuadrilateralCommand: DefaultMultiPointCommand, QuadrilateralCommand {
+open class DefaultQuadrilateralCommand: DefaultMultiPointCommand, QuadrilateralCommand {
 	
-	init(text: String, colour: LDColour, points: [Point3D]) {
+	public init(text: String, colour: LDColour, points: [Point3D]) {
 		super.init(type: .quadrilateral, text: text, colour: colour, points: points)
 	}
 
-	func inverted() -> QuadrilateralCommand {
+	public func inverted() -> QuadrilateralCommand {
 		let p = self.points.reversed().map { $0 }
 		return DefaultQuadrilateralCommand(text: self.text, colour: self.colour, points: p)
 	}

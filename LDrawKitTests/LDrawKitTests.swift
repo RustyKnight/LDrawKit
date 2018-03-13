@@ -27,27 +27,32 @@ class LDrawKitTests: XCTestCase {
 			
 			
 //			let pathPrefix = URL(fileURLWithPath: "/Users/swhitehead/Downloads/ldraw")
-			let named = "parts/3005.dat"
+//			let named = "parts/3005.dat"
+			let named = "stud.dat"
 			print("Read \(named)")
 			
 			let part = try PartParser(partName: named).parse()
 		
-//			let part = try Part(pathPrefix: pathPrefix, source: partPath)
-			dump(part.commands)
+//			dump(part.commands)
+			
+			let flat = part.backed()
+			dump(flat.commands)
+//			let baked = part.conformingTo(winding: .counterClockWise)
+//			dump(baked.commands)
 			
 			print("-----")
-			let baked = part.conformingTo(winding: .counterClockWise)
-			dump(baked.commands)
+			let inverted = flat.inverted()
+			dump(inverted.commands)
 		} catch let error {
 			XCTFail("\(error)")
 		}
 	}
 	
-	func dump(_ commands: [Command]) {
+	func dump(_ commands: [Command], offset: String = "") {
 		for command in commands {
-			print(command)
+			print("\(offset)\(command)")
 			if let subFileCommand = command as? SubFileCommand {
-				dump(subFileCommand.commands)
+				dump(subFileCommand.commands, offset: offset + "  ")
 			}
 		}
 	}

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7023ECC220212DD80045BC70 /* LogWrapperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7023ECC120212DD80045BC70 /* LogWrapperKit.framework */; };
+		704493F4204FD09400335126 /* Part+Inverted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704493F3204FD09400335126 /* Part+Inverted.swift */; };
+		704493F6204FD4D600335126 /* TestCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704493F5204FD4D600335126 /* TestCommand.swift */; };
 		70826E68201A8545002B59F6 /* BFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E67201A8545002B59F6 /* BFC.swift */; };
 		70826E6A201A855B002B59F6 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E69201A855B002B59F6 /* Command.swift */; };
 		70826E7E201C1BD3002B59F6 /* LDrawKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70826E7D201C1BD3002B59F6 /* LDrawKit.swift */; };
@@ -25,6 +27,7 @@
 		70ED6F0F20142C0F00BAF509 /* PartLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F0E20142C0F00BAF509 /* PartLine.swift */; };
 		70ED6F1120142F5500BAF509 /* LDColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F1020142F5500BAF509 /* LDColour.swift */; };
 		70ED6F13201430C500BAF509 /* CGColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED6F12201430C500BAF509 /* CGColor+Hex.swift */; };
+		70F1107E204BC4A700BC7EB3 /* Part+Baked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F1107D204BC4A700BC7EB3 /* Part+Baked.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		7023ECC120212DD80045BC70 /* LogWrapperKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit.framework; path = Carthage/Build/Mac/LogWrapperKit.framework; sourceTree = "<group>"; };
+		704493F3204FD09400335126 /* Part+Inverted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Part+Inverted.swift"; sourceTree = "<group>"; };
+		704493F5204FD4D600335126 /* TestCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCommand.swift; sourceTree = "<group>"; };
 		70826E67201A8545002B59F6 /* BFC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFC.swift; sourceTree = "<group>"; };
 		70826E69201A855B002B59F6 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		70826E7B201C1B89002B59F6 /* LogWrapperKit_MacOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit_MacOS.framework; path = Carthage/Build/Mac/LogWrapperKit_MacOS.framework; sourceTree = "<group>"; };
@@ -60,6 +65,7 @@
 		70ED6F0E20142C0F00BAF509 /* PartLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartLine.swift; sourceTree = "<group>"; };
 		70ED6F1020142F5500BAF509 /* LDColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDColour.swift; sourceTree = "<group>"; };
 		70ED6F12201430C500BAF509 /* CGColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+Hex.swift"; sourceTree = "<group>"; };
+		70F1107D204BC4A700BC7EB3 /* Part+Baked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Part+Baked.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,7 @@
 			children = (
 				70ED6EFB201303EB00BAF509 /* LDrawKitTests.swift */,
 				70ED6EFD201303EB00BAF509 /* Info.plist */,
+				704493F5204FD4D600335126 /* TestCommand.swift */,
 			);
 			path = LDrawKitTests;
 			sourceTree = "<group>";
@@ -155,6 +162,8 @@
 				70ED6F0C201404F800BAF509 /* String+Trim.swift */,
 				70ED6F12201430C500BAF509 /* CGColor+Hex.swift */,
 				70A3E68F2015C66400D7FAAA /* String+Mutating.swift */,
+				70F1107D204BC4A700BC7EB3 /* Part+Baked.swift */,
+				704493F3204FD09400335126 /* Part+Inverted.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,7 +225,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Shane Whitehead";
 				TargetAttributes = {
 					70ED6EEC201303EB00BAF509 = {
@@ -273,6 +282,7 @@
 			files = (
 				70ED6F1120142F5500BAF509 /* LDColour.swift in Sources */,
 				70ED6F13201430C500BAF509 /* CGColor+Hex.swift in Sources */,
+				70F1107E204BC4A700BC7EB3 /* Part+Baked.swift in Sources */,
 				70ED6F0B201404CB00BAF509 /* String+RawRepresentable.swift in Sources */,
 				70ED6F0F20142C0F00BAF509 /* PartLine.swift in Sources */,
 				70A3E6902015C66400D7FAAA /* String+Mutating.swift in Sources */,
@@ -283,6 +293,7 @@
 				708D6D7E2022ECBB009DED22 /* PartParser.swift in Sources */,
 				70826E7E201C1BD3002B59F6 /* LDrawKit.swift in Sources */,
 				70826E68201A8545002B59F6 /* BFC.swift in Sources */,
+				704493F4204FD09400335126 /* Part+Inverted.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70ED6EFC201303EB00BAF509 /* LDrawKitTests.swift in Sources */,
+				704493F6204FD4D600335126 /* TestCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +331,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -326,6 +339,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -379,6 +393,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -386,6 +401,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -411,6 +427,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
