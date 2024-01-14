@@ -1,4 +1,4 @@
-# Brick Viewer
+# LDDrawKit
 
 Part of the [LDraw](https://www.ldraw.org) converter/viewer workflow
 
